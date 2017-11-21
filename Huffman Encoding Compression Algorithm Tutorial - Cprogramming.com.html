@@ -1,0 +1,764 @@
+
+<!-- saved from url=(0072)https://www.cprogramming.com/tutorial/computersciencetheory/huffman.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds2.feedburner.com/Cprogrammingcom/">
+<link rel="stylesheet" href="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/style.css" type="text/css">
+<!--[if IE]>
+    <link rel="stylesheet" href="https://mainsite-static-cprogrammingcom.netdna-ssl.com/main_images/style-ie.css?np4" type="text/css">
+<![endif]-->
+
+
+<meta name="keywords" content="Programming, C++, C++ tutorials, C++ programming, C programming, tutorials, C++ compilers, c compilers, source code, basic C++ tutorials, Programming in C++, tutorial, DJGPP, source code, Programming, C, tutorial, DJGPP, C++ source code, basic C++ tutorial, programming quiz, computer science, computer science quiz, C++ quiz, computer programming, programming computers, how to program computers">
+<meta name="Description" content="C++ programming resources, especially for beginners. Understandable C++ tutorials, source code, a 50 question C++ quiz, compiler information, a very active message board, and a free programming newsletter.">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com</title>
+
+<!-- ADDED DFP -->
+<script src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/cb=gapi.loaded_1" async=""></script><script src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/cb=gapi.loaded_0" async=""></script><script src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/all.js" id="fbjssdk"></script><script src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/plusone.js" id="gplus1js" gapi_processed="true"></script><script src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/widgets.js" id="tweetjs"></script><script async="" src="https://cdn2.lockerdome.com/_js/ajs.js" id="ld-ajs"></script><script type="text/javascript" async="" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/ga.js"></script><script type="text/javascript" src="https://partner.googleadservices.com/gampad/google_service.js">
+</script>
+<script type="text/javascript">
+GS_googleAddAdSenseService("ca-pub-2560316224908115");
+GS_googleEnableAllServices();
+</script>
+<script type="text/javascript">
+GA_googleAddSlot("ca-pub-2560316224908115", "RunOfSite_LargeRectangle_ATF_336x280");
+GA_googleAddSlot("ca-pub-2560316224908115", "RunOfSite_ATF_leaderboard_728x90");
+
+GA_googleAddSlot("ca-pub-2560316224908115", "RunOfSite_ATF_skyscraper_160x600");
+
+</script>
+<script type="text/javascript">
+GA_googleFetchAds();
+</script>
+<!-- END ADDED DFP -->
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7820175-1']);
+  _gaq.push(['_setDomainName', '.cprogramming.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<style type="text/css">:root topadblock, :root td[valign="top"] > .mainmenu[style="padding:10px 0 0 0 !important;"], :root input[onclick^="window.open('http://www.friendlyduck.com/"], :root input[onclick^="window.open('http://www.FriendlyDuck.com/"], :root img[alt^="Fuckbook"], :root iframe[src^="http://cdn1.adexprt.com/"], :root iframe[src^="http://ad.yieldmanager.com/"], :root div[id^="proadszone-"], :root div[id^="mainads"], :root div[id^="lazyad-"], :root div[id^="google_dfp_"], :root div[id^="dmRosAdWrapper"], :root div[id^="div_ad_stack_"], :root div[id^="div-adtech-ad-"], :root iframe[id^="google_ads_iframe"], :root div[id^="crt-"][style], :root div[id^="cns_ads_"], :root div[id^="ads300_250-widget"], :root iframe[src^="http://cdn2.adexprt.com/"], :root div[id^="ads300_100-widget"], :root div[id^="ads250_250-widget"], :root div[id^="adrotate_widgets-"], :root div[id^="ad_script_"], :root div[id^="ad-server-"], :root div[id^="acm-ad-tag-"], :root div[id^="MarketGid"], :root div[id^="ADV-SLOT-"], :root div[class^="proadszone-"], :root div[class^="block-openx-"], :root div[class^="BlockAdvert-"], :root div[class^="Ad__container"], :root div[class^="Ad__bigBox"], :root div[class$="dealnews"] > .dealnews, :root div > [class][onclick*=".updateAnalyticsEvents"], :root bottomadblock, :root aside[id^="div-gpt-ad"], :root a[target="_blank"][href^="http://api.taboola.com/"], :root a[style="display:block;width:300px;min-height:250px"][href^="http://li.cnet.com/click?"], :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[onmousedown^="this.href='http://staffpicks.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[onmousedown^="this.href='http://staffpicks.outbrain.com/network/redir?"][target="_blank"], :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[onmousedown^="this.href='/wp-content/embed-ad-content/"], :root iframe[src^="http://static.mozo.com.au/strips/"], :root a[href^="https://www.spyoff.com/"], :root a[href^="https://www.share-online.biz/affiliate/"], :root a[href^="https://www.oboom.com/ad/"], :root a[href^="https://www.googleadservices.com/pagead/aclk?"], :root a[href^="https://www.firstload.com/affiliate/"], :root a[href^="https://www.camyou.com/?cam="][href*="&track="], :root a[href^="https://www.adskeeper.co.uk/"], :root a[href^="https://windscribe.com/promo/"], :root a[href^="https://trust.zone/go/r.php?RID="], :root div[class^="gemini-ad"], :root a[href^="https://torguard.net/aff.php"], :root div[id^="YFBMSN"], :root a[href^="https://secure.eveonline.com/ft/?aid="], :root a[href^="https://pubads.g.doubleclick.net/"], :root a[href^="https://go.ad2up.com/"], :root a[href^="https://farm.plista.com/pets"], :root a[href^="https://click.plista.com/pets"], :root a[href^="https://chaturbate.com/affiliates/"], :root a[href^="https://affiliates.bet-at-home.com/processing/"], :root a[href^="https://adhealers.com/"], :root a[href^="https://ad.atdmt.com/"], :root a[href^="http://xtgem.com/click?"], :root div[itemtype="http://schema.org/WPAdBlock"], :root a[href^="http://xads.zedo.com/"], :root a[href^="http://wxdownloadmanager.com/dl/"], :root a[href^="http://www1.clickdownloader.com/"], :root a[href^="http://www.zergnet.com/i/"], :root a[href^="http://www.usearchmedia.com/signup?"], :root a[href^="http://www.torntv-downloader.com/"], :root a[href^="http://www.tirerack.com/affiliates/"], :root a[href^="http://www.text-link-ads.com/"], :root div[id^="div_openx_ad_"], :root a[href^="http://www.streamate.com/exports/"], :root a[href^="http://www.sfippa.com/"], :root a[href^="http://www.xmediaserve.com/"], :root a[href^="http://www.sex.com/videos/?utm_"], :root a[href^="http://www.sex.com/?utm_"], :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"], :root a[href^="http://www.roboform.com/php/land.php"], :root a[href^="http://www.quick-torrent.com/download.html?aff"], :root #flowplayer > div[style="z-index: 208; position: absolute; width: 300px; height: 275px; left: 222.5px; top: 85px;"], :root a[href^="http://www.plus500.com/?id="], :root div[id^="google_ads_iframe_"], :root a[href^="http://www.affiliates1128.com/processing/"], :root a[href^="http://www.pheedo.com/"], :root a[href^="http://guideways.info/"], :root #\5f _nq__hh[style="display:block!important"], :root a[href^="http://www.on2url.com/app/adtrack.asp"], :root a[href^="http://www.myvpn.pro/"], :root a[href^="http://liversely.net/"], :root a[href^="http://www.my-dirty-hobby.com/?sub="], :root a[href^="http://www.download-provider.org/"], :root a[href^="http://www.installads.net/"], :root a[href^="http://www.incredimail.com/?id="], :root a[href^="http://tracking.toroadvertising.com/"], :root a[href^="http://www.graboid.com/affiliates/"], :root a[href^="http://www.gamebookers.com/cgi-bin/intro.cgi?"], :root a[href^="http://www.friendlyquacks.com/"], :root a[href^="http://cdn3.adbrau.com/"], :root a[href^="http://www.friendlyadvertisements.com/"], :root a[href^="http://ul.to/ref/"], :root a[href^="http://www.freefilesdownloader.com/"], :root a[href^="http://www.fpcTraffic2.com/blind/in.cgi?"], :root a[href^="http://www.fonts.com/BannerScript/"], :root a[href^="http://www.fleshlight.com/"], :root a[href^="http://www.mysuperpharm.com/"], :root a[href^="http://www.firstload.de/affiliate/"], :root a[href^="http://duckcash.eu/"], :root a[href^="http://www.firstload.com/affiliate/"], :root a[href*=".trust.zone"], :root a[href^="http://www.firstclass-download.com/"], :root a[href^="http://www.faceporn.net/free?"], :root a[href^="http://clicks.binarypromos.com/"], :root a[href^="http://www.downloadplayer1.com/"], :root a[href^="http://www.down1oads.com/"], :root a[href^="http://www.liutilities.com/"], :root a[href^="http://tracking.deltamediallc.com/"], :root a[href^="http://www.dl-provider.com/search/"], :root a[href^="http://www.cash-duck.com/"], :root a[href^="http://www.bet365.com/"][href*="?affiliate="], :root a[href^="http://www.bet365.com/"][href*="&affiliate="], :root a[href^="http://www.badoink.com/go.php?"], :root a[href^="http://ad-emea.doubleclick.net/"], :root a[href^="http://www.adskeeper.co.uk/"], :root div[id^="advads-"], :root a[href^="http://www.ringtonematcher.com/"], :root a[href^="http://www.adshost2.com/"], :root a[href^="http://www.adbrite.com/mb/commerce/purchase_form.php?"], :root a[href^="http://www.brightwheel.info/"], :root a[href^="http://www.1clickdownloader.com/"], :root a[href^="http://www.123-reg.co.uk/affiliate2.cgi"], :root a[href^="http://prousa.work/"], :root a[href^="http://see-work.info/"], :root a[href^="http://websitedhoome.com/"], :root a[href^="http://www.paddypower.com/?AFF_ID="], :root a[href^="http://uploaded.net/ref/"], :root a[href^="http://track.adform.net/"], :root a[href^="http://t.wowtrk.com/"], :root a[href^="http://adprovider.adlure.net/"], :root a[href^="http://tezfiles.com/pr/"], :root a[href^="http://www.easydownloadnow.com/"], :root .mw > #rcnt > #center_col > #taw > .c, :root a[href^="http://taboola-"][href*="/redirect.php?app.type="], :root a[href^="http://t.mdn2015x3.com/"], :root a[href^="http://clickandjoinyourgirl.com/"], :root a[href^="http://webtrackerplus.com/"], :root a[href^="http://b.bestcompleteusa.info/"], :root a[href^="http://t.mdn2015x2.com/"], :root a[href^="http://sharesuper.info/"], :root a[href^="http://getlinksinaseconds.com/"], :root a[href^="http://secure.signup-way.com/"], :root a[href^="http://secure.signup-page.com/"], :root [onclick^="window.open('http://adultfriendfinder.com/search/"], :root a[href^="http://secure.hostgator.com/~affiliat/"], :root a[href^="http://ryushare.com/affiliate.python"], :root a[href^="http://record.commissionking.com/"], :root a[href^="http://record.betsafe.com/"], :root a[href^="http://pubads.g.doubleclick.net/"], :root a[href^="http://www.epicgameads.com/"], :root a[href^="http://gca.sh/user/register?ref="], :root a[href^="http://promos.bwin.com/"], :root a[href^="http://prochina.link/"], :root a[href^="http://z1.zedo.com/"], :root a[href^="http://pokershibes.com/index.php?ref="], :root .ra[width="30%"][align="right"] + table[width="70%"][cellpadding="0"], :root a[href^="http://searchtabnew.com/"], :root a[href^="http://pan.adraccoon.com?"], :root a[href^="http://n217adserv.com/"], :root a[href^="http://mojofun.info/"], :root a[href^="http://mmo123.co/"], :root .plistaList > .itemLinkPET, :root a[href^="http://mgid.com/"], :root a[href^="http://media.paddypower.com/redirect.aspx?"], :root a[href^="http://marketgid.com"], :root a[href^="http://www.bitlord.me/share/"], :root a[href^="http://www.socialsex.com/"], :root a[href^="http://www.affbuzzads.com/affiliate/"], :root a[href*=".qertewrt.com/"], :root a[href^="http://lp.ncdownloader.com/"], :root a[href*=".adsrv.eacdn.com/"] > img, :root a[href^="http://lp.ilivid.com/"], :root #rhs_block .xpdopen > ._OKe > div > .mod > ._yYf, :root a[href^="http://lp.ezdownloadpro.info/"], :root a[href^="http://liversely.com/"], :root a[href^="http://latestdownloads.net/download.php?"], :root a[href^="http://keep2share.cc/pr/"], :root a[href^="http://k2s.cc/pr/"], :root a[href^="http://join3.bannedsextapes.com/track/"], :root a[href^="http://green.trafficinvest.com/"], :root a[href^="http://jobitem.org/"], :root a[href^="//adbit.co/?a=Advertise&"], :root a[href^="http://istri.it/?"], :root a[href^="https://dltags.com/"], :root a[href^="http://onclickads.net/"], :root a[href^="http://www.terraclicks.com/"], :root a[href^="http://www.coinducks.com/"], :root a[href^="http://internalredirect.site/"], :root a[href^="http://cdn.adstract.com/"], :root a[href^="http://hyperlinksecure.com/go/"], :root a[href^="http://greensmoke.com/"], :root a[href^="http://www.downloadthesefiles.com/"], :root a[href^="http://farm.plista.com/pets"], :root a[href^="http://mo8mwxi1.com/"], :root a[href^="http://www.revenuehits.com/"], :root a[href^="http://go.seomojo.com/tracking202/"], :root div[id^="block-views-topheader-ad-block-"], :root a[href^="http://go.oclaserver.com/"], :root .__y_elastic .__y_item, :root a[href^="http://go.mobisla.com/"], :root a[href^="http://go.ad2up.com/"], :root a[href^="http://www.duckssolutions.com/"], :root a[href^="http://games.ucoz.ru/"][target="_blank"], :root div[id^="div-gpt-ad"], :root a[href^="http://fusionads.net"], :root a[href^="http://us.marketgid.com"], :root a[href^="http://imads.integral-marketing.com/"], :root a[href^="http://freesoftwarelive.com/"], :root a[href^="http://adtrackone.eu/"], :root a[href^="http://finaljuyu.com/"], :root a[href^="http://tour.affbuzzads.com/"], :root a[href^="http://fileupnow.rocks/"], :root a[href^="http://fileloadr.com/"], :root a[href^="http://elitefuckbook.com/"], :root div[id^="ads300_600-widget"], :root div[class^="Ad__adContainer"], :root a[href^="http://web.adblade.com/"], :root a[href^="http://elite-sex-finder.com/?"], :root a[href^="http://eclkmpsa.com/"], :root a[href^="http://dethao.com/"], :root a[href^="http://www.linkbucks.com/referral/"], :root a[href^="http://ddownload39.club/"], :root a[href^="http://www.moneyducks.com/"], :root a[href^="http://data.linoleictanzaniatitanic.com/"], :root a[href^="http://data.committeemenencyclopedicrepertory.info/"], :root a[href^="https://understandsolar.com/signup/?lead_source="][href*="&tracking_code="], :root a[href^="http://hdplugin.flashplayer-updates.com/"], :root a[href^="http://data.ad.yieldmanager.net/"], :root a[href^="http://campaign.bharatmatrimony.com/track/"], :root #content > #center > .dose > .dosesingle, :root a[href^="http://d2.zedo.com/"], :root a[href^="http://contractallsticker.net/"], :root a[href^="http://codec.codecm.com/"], :root div[id^="ads120_600-widget"], :root a[href^="http://clk.directrev.com/"], :root a[href^="http://refer.webhostingbuzz.com/"], :root a[href^="https://paid.outbrain.com/network/redir?"], :root a[href^="http://clickserv.sitescout.com/"], :root a[href^="http://clicks.guamwnvgashbkashawhgkhahshmashcas.pw/"], :root a[href^="https://dediseedbox.com/clients/aff.php?"], :root a[href^="http://www.wantstraffic.com/"], :root .lads[width="100%"][style="background:#FFF8DD"], :root a[href^="http://databass.info/"], :root a[href^="http://www.urmediazone.com/signup"], :root a[href^="http://ads.pheedo.com/"], :root a[href^="http://click.plista.com/pets"], :root a[href^="http://download-performance.com/"], :root .__ywvr .__y_item, :root a[href^="http://track.incognitovpn.com/"], :root a[href^="http://click.guamwnvgashbkashawhgkhahshmashcas.pw/"], :root a[href^="http://rekoverr.com/"], :root [lazy-ad="lefttop_banner"], :root a[href^="http://servicegetbook.net/"], :root a[href^="http://cinema.friendscout24.de?"], :root a[href^="http://cpaway.afftrack.com/"], :root a[href^="http://cdn.adsrvmedia.net/"], :root a[href^="http://360ads.go2cloud.org/"], :root a[href^="http://dftrck.com/"], :root a[href^="http://casino-x.com/?partner"], :root a[href^="http://www.clkads.com/adServe/"], :root a[href^="http://ads.expekt.com/affiliates/"], :root a[href^="http://callville.xyz/"], :root a[href^="http://serve.williamhill.com/promoRedirect?"], :root a[href^="http://feedads.g.doubleclick.net/"], :root a[href^="http://bs.serving-sys.com/"], :root a[href^="https://trklvs.com/"], :root a[href^="http://bestorican.com/"], :root a[href^="http://www.getyourguide.com/?partner_id="], :root a[href^="http://bcp.crwdcntrl.net/"], :root a[href^="http://install.securewebsiteaccess.com/"], :root .inlineNewsletterSubscription + .inlineNewsletterSubscription div[class$="_item"], :root a[href^="http://clkmon.com/adServe/"], :root a[href^="http://www.torntvdl.com/"], :root a[href^="http://at.atwola.com/"], :root ADS-RIGHT, :root a[data-oburl^="https://paid.outbrain.com/network/redir?"], :root a[href^="http://affiliates.score-affiliates.com/"], :root #rhs_block .mod > .luhb-div > div[data-async-type="updateHotelBookingModule"], :root a[href^="http://anonymous-net.com/"], :root a[href^="http://affiliate.glbtracker.com/"], :root a[href^="http://www.fbooksluts.com/"], :root a[href^="http://c.actiondesk.com/"], :root a[href^="http://www.fducks.com/"], :root .icons-rss-feed + .icons-rss-feed div[class$="_item"], :root a[href^="http://aflrm.com/"], :root a[href^="http://partner.sbaffiliates.com/"], :root a[href^="http://affiliate.coral.co.uk/processing/"], :root a[href^="http://api.content.ad/"], :root a[href^="https://bs.serving-sys.com"], :root a[href^="https://atomidownload.com/"], :root a[href^="http://adserver.itsfogo.com/"], :root a[href^="http://adtransfer.net/"], :root a[href^="http://zevera.com/afi.html"], :root a[href^="http://adsrv.keycaptcha.com"], :root a[data-widget-outbrain-redirect^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://www.mobileandinternetadvertising.com/"], :root a[href^="http://adserving.unibet.com/"], :root a[href^="http://chaturbate.com/affiliates/"], :root a[href^="http://adserving.liveuniversenetwork.com/"], :root a[href^="http://adserver.adtechus.com/"], :root a[href^="http://buysellads.com/"], :root a[href^="http://down1oads.com/"], :root #\5f _mom_ad_12, :root a[href^="http://ads.integral-marketing.com/"], :root a[href^="http://adserver.adtech.de/"], :root a[href^="http://ads.betfair.com/redirect.aspx?"], :root a[href^="http://aff.ironsocket.com/"], :root a[href^="http://ads.affbuzzads.com/"], :root a[href^="http://online.ladbrokes.com/promoRedirect?"], :root a[href^="http://ads.ad-center.com/"], :root a[href^="http://adrunnr.com/"], :root a[href^="https://www.dsct1.com/"], :root a[href^="http://amzn.to/"] > img[src^="data"], :root a[href^="http://www.liversely.net/"], :root a[href^="http://admingame.info/"], :root div[id^="q1-adset-"], :root a[href^="http://adfarm.mediaplex.com/"], :root #center_col > #taw > #tvcap > .rscontainer, :root a[href^="http://adf.ly/?id="], :root a[href^="http://goldmoney.com/?gmrefcode="], :root a[href^="http://adexprt.me/"], :root a[href^="http://www.flashx.tv/downloadthis"], :root a[href^="http://affiliates.pinnaclesports.com/processing/"], :root a[href^="http://www.menaon.com/installs/"], :root a[href^="http://www.sex.com/pics/?utm_"], :root a[href^="http://engine.newsmaxfeednetwork.com/"], :root a[href^="http://ad.yieldmanager.com/"], :root a[href^="http://ad.doubleclick.net/"], :root #resultspanel > #topads, :root a[href^="http://www.seekbang.com/cs/"], :root a[href^="http://bluehost.com/track/"], :root a[href^="http://www.drowle.com/"], :root a[href^="http://abc2.mobile-10.com/"], :root a[href^="http://srvpub.com/"], :root a[href^="http://a.adquantix.com/"], :root a[href^="http://NowDownloadAll.com"], :root a[href^="http://www.ducksnetwork.com/"], :root a[href^="http://3wr110.net/"], :root a[href^="//ads.ad-center.com/"], :root a[href^="http://1phads.com/"], :root #center_col > #resultStats + div[style="border:1px solid #dedede;margin-bottom:11px;padding:5px 7px 5px 6px"], :root a[href^="https://www.secureupload.eu/suprerefid="], :root a[href^="http://yads.zedo.com/"], :root #mbEnd[cellspacing="0"][cellpadding="0"], :root a[href^="http://adclick.g.doubleclick.net/"], :root a[href^="//t.MtagMonetizationA.com/"], :root #\5f _mom_ad_2, :root a[href^="http://ads.activtrades.com/"], :root a[href^="//api.ad-goi.com/"], :root a[href^="http://www.clickansave.net/"], :root a[href^="http://get.slickvpn.com/"], :root a[href^="https://keep2share.cc/pr/"], :root [onclick*="content.ad/"], :root a[href^="http://galleries.securewebsiteaccess.com/"], :root a[href^=" http://n47adshostnet.com/"], :root a[href^="http://linksnappy.com/?ref="], :root #main_col > #center_col div[style="font-size:14px;margin:0 4px;padding:1px 5px;background:#fff7ed"], :root a[href^="http://adtrack123.pl/"], :root .section-result[data-result-ad-type], :root script[src^="http://free-shoutbox.net/app/webroot/shoutbox/sb.php?shoutbox="] + #freeshoutbox_content, :root a[href^=" http://ads.ad-center.com/"], :root .GPMV2XEDA2 > .GPMV2XEDP1 > .GPMV2XEDJBB, :root a[href*="onclkds."], :root a[href^="http://www.idownloadplay.com/"], :root a[href^="//srv.buysellads.com/"], :root div[itemtype="http://www.schema.org/WPAdBlock"], :root .__zinit .__y_item, :root .ch[onclick="ga(this,event)"], :root a[href^="https://ad.doubleclick.net/"], :root a[href*="letsadvertisetogether.com"], :root a[href^="http://fsoft4down.com/"], :root a[href*="ad2upapp.com/"], :root .ob_container a[data-redirect^="http://paid.outbrain.com/network/redir?"], :root #mn #center_col > div > h2.spon:first-child, :root a[href*="=Adtracker"], :root a[href^="https://www.popads.net/users/"], :root a[href^="http://tracking.crazylead.com/"], :root a[href*="/cmd.php?ad="], :root a[href^="http://www.myfreepaysite.com/sfw_int.php?aid"], :root a[href^="http://galleries.pinballpublishernetwork.com/"], :root .ob_dual_right > .ob_ads_header ~ .odb_div, :root a[href*=".adk2x.com/"], :root #\5f _admvnlb_modal_container, :root a[href^="http://www.duckcash.eu/"], :root a[href^="http://api.ringtonematcher.com/"], :root a[data-url^="http://paid.outbrain.com/network/redir?"] + .author, :root #MAIN.ShowTopic > .ad, :root a[href^="http://findersocket.com/"], :root a[href^="http://cdn3.adexprts.com/"], :root a[data-url^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://www.uniblue.com/cm/"], :root #rhs_block > script + .c._oc._Ve.rhsvw, :root a[data-redirect^="http://click.plista.com/pets"], :root a[href^="http://www.pinkvisualpad.com/?revid="], :root a[href^="http://www.twinplan.com/AF_"], :root a[href^="http://n.admagnet.net/"], :root a[href^="http://connectlinking6.com/"], :root a[data-obtrack^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://bc.vc/?r="], :root a[href^="//www.mgid.com/"], :root a[href^="http://www.pinkvisualgames.com/?revid="], :root .__y_inner > .__y_item, :root .jobs-information-call-to-action + .jobs-information-call-to-action div[class$="_item"], :root AMP-AD, :root a[data-oburl^="http://paid.outbrain.com/network/redir?"], :root .widget-pane-section-result[data-result-ad-type], :root #center_col > #main > .dfrd > .mnr-c > .c._oc._zs, :root .trc_rbox_div .syndicatedItemUB, :root .ob_container .item-container-obpd, :root a[href^="http://centertrust.xyz/"], :root .trc_rbox_div .syndicatedItem, :root a[target="_blank"][onmousedown="this.href^='http://paid.outbrain.com/network/redir?"], :root #tads + div + .c, :root a[href^="http://www.accuserveadsystem.com/accuserve-go.php?"], :root a[href^="http://c.ketads.com/"], :root .trc_rbox .syndicatedItem, :root a[href^="http://pwrads.net/"], :root #mn div[style="position:relative"] > #center_col > div > ._dPg, :root .rhsvw[style="background-color:#fff;margin:0 0 14px;padding-bottom:1px;padding-top:1px;"], :root .ra[align="right"][width="30%"], :root .plista_widget_belowArticleRelaunch_item[data-type="pet"], :root #main-content > [style="padding:10px 0 0 0 !important;"], :root a[href^="http://www.webtrackerplus.com/"], :root .GJJKPX2N1 > .GJJKPX2M1 > .GJJKPX2P4, :root a[href^="http://ad.au.doubleclick.net/"], :root a[href^="http://record.sportsbetaffiliates.com.au/"], :root #topstuff > #tads, :root a[href^="http://www.1clickmoviedownloader.info/"], :root .mw > #rcnt > #center_col > #taw > #tvcap > .c, :root a[href^="http://affiliate.godaddy.com/"], :root #mn #center_col > div > h2.spon:first-child + ol:last-child, :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"], :root a[href^="http://www.downloadweb.org/"], :root .plistaList > .plista_widget_underArticle_item[data-type="pet"], :root #center_col > #res > #topstuff + #search > div > #ires > #rso > #flun, :root a[href^="http://adultfriendfinder.com/p/register.cgi?pid="], :root a[href^="http://www.yourfuckbook.com/?"], :root a[href^="http://ads.sprintrade.com/"], :root .GHOFUQ5BG2 > .GHOFUQ5BF2 > .GHOFUQ5BG5, :root a[href^="http://www.richducks.com/"], :root a[href^="http://www.babylon.com/welcome/index?affID"], :root a[href^="http://ad-apac.doubleclick.net/"], :root .gbfwa > div[class$="_item"], :root a[href^="http://prochina.space/"], :root .rscontainer > .ellip, :root a[data-redirect^="this.href='http://paid.outbrain.com/network/redir?"], :root a[href^="http://stateresolver.link/"], :root .__ywl .__y_item, :root a[href^="http://www.myfreepaysite.com/sfw.php?aid"], :root a[href^="http://www.ireel.com/signup?ref"], :root #center_col > #resultStats + #tads, :root .__yinit .__y_item, :root [ad-id^="googlead"], :root a[href^="http://adlev.neodatagroup.com/"], :root .ra[align="left"][width="30%"], :root a[href^="https://trackjs.com/?utm_source"], :root AFS-AD, :root a[href^="http://server.cpmstar.com/click.aspx?poolid="], :root #cnt #center_col > #res > #topstuff > .ts, :root iframe[id^="google_ads_frame"], :root a[href^="http://www.dealcent.com/register.php?affid="], :root #cnt #center_col > #taw > #tvcap > .c._oc._Lp, :root .trc_rbox_div a[target="_blank"][href^="http://tab"], :root .GKJYXHBF2 > .GKJYXHBE2 > .GKJYXHBH5, :root #rhs_block .mod > .gws-local-hotels__booking-module, :root a[href^="http://banners.victor.com/processing/"], :root a[href*="googleme.eu"], :root .mod > ._jH + .rscontainer, :root .GFYY1SVD2 > .GFYY1SVC2 > .GFYY1SVF5, :root #rhswrapper > #rhssection[border="0"][bgcolor="#ffffff"], :root .Mpopup + #Mad > #MadZone, :root a[href^="http://www.TwinPlan.com/AF_"], :root a[href^="http://landingpagegenius.com/"], :root a[href^="http://www.streamtunerhd.com/signup?"], :root #ssmiwdiv[jsdisplay], :root div[id^="ad-div-"], :root #center_col > div[style="font-size:14px;margin-right:0;min-height:5px"] > div[style="font-size:14px;margin:0 4px;padding:1px 5px;background:#fff8e7"], :root a[href^="http://paid.outbrain.com/network/redir?"], :root #ads > .dose > .dosesingle, :root a[href^="http://www.myfreecams.com/?co_id="][href*="&track="], :root a[href^="http://easydownload4you.com/"], :root #rhs_block > #mbEnd, :root #center_col > #\5f Emc, :root a[href^="http://papi.mynativeplatform.com:80/pub2/"], :root div[id^="dfp-ad-"], :root .GB3L-QEDGY .GB3L-QEDF- > .GB3L-QEDE-, :root .rc-cta[data-target], :root a[href^="http://hd-plugins.com/download/"], :root #rhs_block > .ts[cellspacing="0"][cellpadding="0"][style="padding:0"], :root .GFYY1SVE2 > .GFYY1SVD2 > .GFYY1SVG5, :root #flowplayer > div[style="position: absolute; width: 300px; height: 275px; left: 222.5px; top: 85px; z-index: 999;"], :root #center_col > #resultStats + div + #res + #tads, :root .nrelate .nr_partner, :root a[href^="http://bonusfapturbo.nmvsite.com/"], :root a[href^="http://www.sexgangsters.com/?pid="], :root a[href^="http://www.amazon.co.uk/exec/obidos/external-search?"], :root #mn div[style="position:relative"] > #center_col > ._Ak, :root a[href^="http://www.adxpansion.com"], :root div[id^="dfp-slot-"], :root .l-container > #fishtank, :root a[href*="/adrotate-out.php?"], :root a[href^="http://wgpartner.com/"], :root a[href^="http://www.greenmangaming.com/?tap_a="], :root #center_col > #resultStats + #tads + #res + #tads, :root a[href^="http://campaign.bharatmatrimony.com/cbstrack/"], :root .trc_related_container div[data-item-syndicated="true"], :root a[href^="http://t.mdn2015x1.com/"], :root .trc_rbox_border_elm .syndicatedItem, :root a[href^="http://dwn.pushtraffic.net/"], :root a[href$="/vghd.shtml"], :root #rhs_block > ol > .rhsvw > .kp-blk > .xpdopen > ._OKe > ol > ._DJe > .luhb-div, :root p[id^="div-gpt-ad-"], :root #assetsListings[style="display: block;"], :root #header + #content > #left > #rlblock_left, :root a[href*="emprestimo.eu"], :root #content > #right > .dose > .dosesingle { display: none !important; }</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}.fb_mobile_overlay_active{height:100%;overflow:hidden;position:fixed;width:100%}.fb_shrink_active{opacity:1;transform:scale(1, 1);transition-duration:200ms;transition-timing-function:ease-out}.fb_shrink_active:active{opacity:.5;transform:scale(.75, .75)}</style><script type="text/javascript" charset="utf-8" async="" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/button.636814f8e7aa5d4bb2965822d1570e02.js"></script></head>
+
+<body>
+<div>
+
+<a href="https://www.cprogramming.com/"><img class="logo noprint" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/title.png" width="324" height="83" border="0"></a> 
+
+<table class="line noprint"><tbody><tr><td></td></tr></tbody></table>
+<div class="noprint" align="right" style="padding-top:25px;padding-right:25px;">
+<!-- SiteSearch Google -->
+<form action="https://www.google.com/cse" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-2560316224908115:wqvdce-aw4a">
+    <input type="hidden" name="ie" value="ISO-8859-1">
+    <input type="text" name="q" size="31" placeholder="Custom Search" style="background: url(&quot;https://www.google.com/cse/static/images/1x/googlelogo_lightgrey_46x16dp.png&quot;) left center no-repeat rgb(255, 255, 255); text-indent: 48px;">
+    <input type="submit" name="sa" value="Search">
+  </div>
+<input name="siteurl" type="hidden" value="www.cprogramming.com/tutorial/computersciencetheory/huffman.html"><input name="ref" type="hidden" value="www.google.co.za/"><input name="ss" type="hidden" value=""></form>
+<script type="text/javascript" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/brand"></script>
+<!-- SiteSearch Google -->
+</div>
+<div>
+  <table class="main">
+    <tbody><tr>
+
+  	<td class="noprint" colspan="5" bgcolor="#EBEBEB">
+  		<img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/spacer-vert.png" height="6" width="0">
+  	   <center>
+    	<div class="leaderboard" style="display: none !important;">
+
+<!-- ADDED DFP -->
+<!-- ca-pub-2560316224908115/Homepage_ATF_leaderboard_728x90 -->
+<script type="text/javascript">
+GA_googleFillSlot("RunOfSite_ATF_leaderboard_728x90");
+</script>
+<!-- END ADDED DFP -->
+
+</div>
+		</center>
+		<img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/spacer-vert.png" height="4" width="1">
+  	</td>
+        
+  </tr>
+
+  <tr>
+
+     <td class="noprint" width="130" valign="top" bgcolor="#EBEBEB"> 
+     <div class="menu" valign="top" style="font-size:14px;width:200px">
+     <p class="navcategory" align="left">
+          <img class="bullet" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/bullet.gif" width="11" height="14">    Starting out
+     </p>
+
+     <p class="navlist" align="left" style="font-size:14px;">
+             <a href="https://www.cprogramming.com/c++book/">Get the Ebook</a><br>
+             <a href="https://www.cprogramming.com/begin.html">Get Started with C or C++</a><br>
+             <a href="https://www.cprogramming.com/compilers.html">Getting a Compiler</a><br>
+             <a href="https://www.cprogramming.com/books.html">Book Recommendations</a><br>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/bullet.gif" width="11" height="14"> Tutorials
+     </p>
+
+     <p class="navlist" align="left" style="font-size:14px;">
+            <a href="https://www.cprogramming.com/tutorial/c-tutorial.html">C Tutorial</a><br>
+            <a href="https://www.cprogramming.com/tutorial/c++-tutorial.html">C++ Tutorial</a><br>
+            <a href="https://www.cprogramming.com/game-programming.html">Game Programming</a><br>
+            <a href="https://www.cprogramming.com/graphics-programming.html">Graphics Programming</a><br>
+            <a href="https://www.cprogramming.com/algorithms-and-data-structures.html">Algorithms &amp; Data Structures</a><br>
+            <a href="https://www.cprogramming.com/debuggers.html">Debugging</a><br>
+            <a href="https://www.cprogramming.com/tutorial.html">All Tutorials</a><br>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/bullet.gif" width="11" height="14"> Practice
+     </p>
+
+     <p class="navlist" align="left" style="font-size:14px;">
+            <a href="https://www.cprogramming.com/challenge.html">Practice Problems</a><br>
+            <a href="https://www.cprogramming.com/quiz/">Quizzes</a><br>
+     </p>
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/bullet.gif" width="11" height="14"> Resources
+     </p>
+
+     <p class="navlist" align="left" style="font-size:14px;">
+            <a href="https://www.cprogramming.com/cgi-bin/source/source.cgi">Source Code</a><br>
+            <a href="https://www.cprogramming.com/snippets/">Source Code Snippets</a><br>
+            <a href="https://www.cprogramming.com/tips/">C and C++ Tips</a><br>
+            <a href="https://www.cprogramming.com/jobs/">Finding a Job</a>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/bullet.gif" width="11" height="14"> References
+     </p>
+
+     <p class="navlist" align="left" style="font-size:14px;">
+            <a href="https://www.cprogramming.com/function.html">Function Reference</a><br>
+            <a href="https://www.cprogramming.com/reference/">Syntax Reference</a><br>
+            <a href="https://faq.cprogramming.com/cgi-bin/smartfaq.cgi">Programming FAQ</a><br>
+     </p>
+
+     <p class="navcategory" align="left">
+          <br>
+          <img class="bullet" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/bullet.gif" width="11" height="14"> Getting Help
+     </p>
+
+     <p class="navlist" align="left" style="font-size:14px;">
+             <a href="https://www.cprogramming.com/board.html">Message Board</a><br>
+             <a href="https://www.cprogramming.com/email.html">Email</a><br>
+             <a href="https://www.cprogramming.com/about.html">About Us</a>
+     </p>
+     </div>
+
+<center>
+      <br><br>
+     <script type="text/javascript"><!--
+     google_ad_client = "pub-2560316224908115";
+     google_ad_width = 120;
+     google_ad_height = 90;
+     google_ad_format = "120x90_0ads_al";
+     google_ad_channel ="0800879710";
+     google_color_border = "EBEBEB";
+     google_color_bg = "EBEBEB";
+     google_color_link = "C30000";
+     google_color_url = "C30000";
+     google_color_text = "000000";
+     //--></script>
+     <script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js" style="display: none !important;">
+       </script>
+</center>
+
+
+
+    </td>
+	<td class="content" valign="top">
+
+    			<div class="content2">
+
+<h1>Huffman Encoding Compression Algorithm</h1>
+
+<div style="margin-right: 1em; float:left; padding: .4em; border-right: 1px solid #bbb"><img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/alex-50-50.jpg" border="0" style="padding: 0.25em;"><br><a href="https://plus.google.com/113987539774523532573?rel=author"> By Alex Allain</a></div>
+
+The Huffman encoding algorithm is an optimal compression algorithm when only
+the frequency of individual letters are used to compress the data.  (There are
+better algorithms that can use more structure of the file than just letter
+frequencies.)  The idea behind the algorithm is that if you have some letters
+that are more frequent than others, it makes sense to use fewer bits to encode
+those letters than to encode the less frequent letters.
+<br><br><center>
+<div class="noprint">
+<!-- RunOfSite_LargeRectangle_ATF_336x280 -->
+<script type="text/javascript">
+GA_googleFillSlot('RunOfSite_LargeRectangle_ATF_336x280');
+</script>
+</div>
+
+
+</center>
+
+<br><br>
+For instance, take the following phrase: "ADA ATE APPLE".  There are 4 As, 1
+D, 1 T, 2 Es, 2 Ps, 1 L, and 2 spaces.  There are a few ways that might be
+reasonable ways of encoding this phrase using letter frequencies.  First,
+notice that there are only a very few letters that show up here.  It would be
+silly to use chars, with eights bits apiece, to encode each character of the
+string.  In fact, given that there are only seven characters, we could get
+away with using three bits for each character!  If we decided to simply take
+that route, that would require using 14 * 3 bits, for a total of 42 bits (and
+some extra padding for the sake of having correct bit-alignment since you
+have to use an entire byte).  That's not too bad!  It's a lot better than the
+8 * 14 = 112 bits that would otherwise be required.
+
+<br><br>
+But we can do even better if we consider that if one character shows up
+many times, and several characters show up only a few times, then using one
+bit to encode one character and many bits to encode another might actually
+be useful if the character that uses many bits only shows up a small number of
+times!  
+
+<h2>Prefix Property</h2>
+To get away with doing this, we now need a way of knowing how to tell which
+encoding matches which letter.  For instance, before, we knew that every three
+(or eight bits) was a boundary for a letter.  Now, with different length
+encodings for different letters, we need to have some way of separating the
+words out.  For instance, given the string 001011100, if we know that every
+letter is encoded with three bits, it's easy to break apart into 001 011 100.
+If some letters are encoded with one bit, and another with four, it's not
+as easy to know how to do it.
+
+<br><br>
+But we can use a trick commonly referred to as the "prefix property".  The
+idea is that the encoding for any one character isn't a prefix for any other
+character.  For instance, if A is encoded with 0, then no other character will
+be encoded with a zero at the front.  That way, if we start reading a string
+of bits and the first bit is a zero, we know that we can stop reading, and
+we know that bit encodes an A because <b>no other character encoding begins
+with a 0</b>.  In general, the idea is that if we have a full encoding for a
+character, then that encoding won't show up at the beginning of the encoding
+for any other character.  This means that once we actually read a string of
+bits that match a particular character, we know that it must mean that that's
+the next character and we can start fresh from the next bit, looking for a new
+character encoding match.
+
+<br><br>
+Note that it is perfectly fine for the encoding for a character to show up
+<i>in the middle</i> of the encoding for another character because there's no
+way we'd mistake that as the encoding for another character so long as we
+start decoding from the first bit in the compressed file.  (On the other hand,
+if we get off by a bit, this might cause some headaches.)
+
+<br><br>
+Let's take a look at how this might actually work using some simple encodings
+that all have the property that the encoding for one character doesn't show up
+at the beginning of the encoding for another character.  
+
+<pre class="example">char  encoding
+A     0
+E     10
+P     110
+space 1110
+D     11110
+T     111110
+L     111111
+</pre>
+
+This is a pretty simple encoding, but it does match the prefix property -- the
+encoding for A doesn't show up at the front of any other encoding, nor does
+the encoding for B, and so forth.  (Some of the encodings share the same
+prefix, but that's perfectly fine because we can always tell them apart at
+some point by reading in more bits.)
+
+<br><br>
+For instance, the original string we had could be encoded by 
+
+<pre class="example">011110011100111110101110011011011111110 (39 bits)
+</pre>
+
+which we could break apart as 
+<pre class="example">0 11110 0 1110  0 111110 10 1110  0 110 110 111111 10
+A D     A Space A T      E  Space A P   P   L      E
+</pre>
+
+Notice that even using this somewhat simple approach to generating encodings
+that satisfy the prefix property, we managed to save 4 bits over the approach
+of using 3 bits per character.  With even more unbalanced word frequencies, we
+could do even better.
+
+<br><br>
+A nice way of visualizing the process of decoding a file compressed with
+Huffman encoding is to think about the encoding as a <a href="https://www.cprogramming.com/tutorial/lesson18.html">binary tree</a>, where each
+leaf node corresponds to a single character.  At each inner node of the tree,
+if the next bit is a 0, move to the left node, otherwise move to the right
+node.
+<br><br>
+For instance, the prefix encoding used above would have a binary tree
+representation that looks like this -- the X's indicate inner nodes.
+
+<pre class="example">       X
+      / \
+     /   \
+    A     X
+         / \
+        /   \
+       E     X
+            / \
+           /   \ 
+          P     X
+               / \
+              /   \
+             Space X
+                  / \
+                 /   \
+                D     X
+                     / \
+                    /   \
+                   T     L
+</pre>
+
+To decode the string, all we do is follow the links of the tree until we hit a
+leaf node.  Once a leaf node is reached, we output the character stored at the
+leaf and go back up to the root of the tree.
+
+<h2>The Huffman Algorithm</h2>
+
+So far, we've gone over the basic principles we'll need for the Huffman
+algorithm, both for encoding and decoding, but we've had to guess at what
+would be the best way of actually encoding the characters.  For our simple
+text string, it wasn't too hard to figure out a decent encoding that saved a
+few bits.  But in the general case, it might be hard to figure out a good
+solution, let alone the best possible solution.  
+
+<br><br>
+The Huffman algorithm is a so-called "greedy" approach to solving this problem
+in the sense that at each step, the algorithm chooses the best available
+option.  It turns out that this is sufficient for finding the best encoding.
+
+<br><br>
+The basic idea behind the algorithm is to build the tree bottom-up.  First,
+every letter starts off as part of its own tree and the trees are ordered by
+the frequency of the letters in the original string.  Then the two
+least-frequently used letters are combined into a single tree, and the
+frequency of that tree is set to be the combined frequency of the two trees
+that it links together.
+<br><br>
+
+For instance, if we started out with two characters that showed up once, L and
+T, in our sample string, they would be recombined into a new tree that has a
+"supernode" that links to both L and T, and has a frequency of 2:
+
+<pre class="example">
+   X, 2
+   / \
+  /   \
+ L, 1  T, 1
+
+</pre>
+
+This new tree is reinserted into the list of trees in its sorted position.
+The process is then repeated, treating trees with more than one
+element the same as any other trees except that their frequencies are the sum
+of the frequencies of all of the letters at the leaves.  (This is just the sum
+of the left and right children of any node because each node stores the
+frequency information about its own children.)  The process completes when all
+of the trees have been combined into a single tree -- this tree will describe
+a Huffman compression encoding.
+
+<br><br>
+Essentially, a tree is built from the bottom up -- we start out with 256 trees
+(for an ASCII file) -- and end up with a single tree with 256 leaves along
+with 255 internal nodes (one for each merging of two trees, which takes place
+255 times).  The tree has a few interesting properties -- the frequencies of
+all of the internal nodes combined together will give the total number of bits
+needed to write the encoded file (except the header).  This property comes
+from the fact that at each internal node, a decision must be made to go left
+or right, and each internal node will be reached once for each time a
+character beneath it shows up in the text of the document. 
+<br><br>
+To go from plain text to compressed text, you would have to do a traversal of
+the tree and store the path to reach each leaf node as a string of bits (0 for
+going left, 1 for going right) and associate that bit with the particular
+character at the leaf.  Once this is done, converting a plain text file into a
+compressed file is just a matter of replacing each letter with an appropriate
+bit string and then handling the possibility of having some extra bits that
+need to be written (this is discussed more fully in the implementation notes).
+
+Notice that two different data structures likely need to be used here -- a
+list of trees, and those binary trees themselves.  It might make sense to use
+several data structures such as:
+
+<pre class="example">struct tree_t
+{
+    tree_t *left;
+    tree_t *right;
+    char character;
+};
+</pre>
+to store the tree elements (note that if left and right are NULL, then we
+would know that the node is a leaf and that character stores a valid char of
+interest) and
+
+<pre class="example">struct list_t
+{
+    list_t *next;
+    int total_frequency;
+    tree_t *tree;
+}
+</pre>
+
+to store the list of trees that still need to be merged together as a <a href="https://www.cprogramming.com/tutorial/lesson15.html">linked
+list</a>.
+<h3>Implementation Notes</h3>
+The first thing to realize is that when writing a compressed file, you will
+need to include a Huffman header that stores the letter frequencies in the
+original file so that the Huffman tree can be rebuilt by whoever is decoding
+the file.  This could be something as simple as 
+
+<pre class="example">struct huff_header
+{
+    char letters[256];
+};
+</pre>
+
+and you could use fread to read in the entire header at once.  It wouldn't
+hurt to include a "magic number" at the beginning of your header so that your
+program can tell whether the file was actually compressed by your program.
+(This prevents the confusion of wondering if the garbage output is a result of
+a garbage plain text file, or if the file being decompressed wasn't actually
+created from a plain text file.)
+
+<br><br>
+When implementing Huffman compression, remember that any one of many possible
+encodings may be valid, and the differences come about based on how you build
+up the tree.  This means that both the compressor and decompressor will need
+to follow the same rules.  In practice, it probably makes sense to use the
+same tree building code for both.
+
+<br><br>
+Files are written in chunks of eight bits, but it's unlikely that you will
+have a file that, when compressed, turns out to need an exact multiple of
+eight bits.  You'll have to add some extra junk at the end of the last byte
+you write to the file, and when decoding, you'll need some way of knowing when
+you've finished reading the valid bits and started reading the bits that were
+added as packing (which may or may not encode a character).  One way of doing
+this would be to keep track of the number of letters decompressed so far and
+stop decoding the file when that limit has been reached.
+
+<!-- removed chitika -->
+ 
+               <hr>
+<b>Related articles</b><br><br><a href="https://www.cprogramming.com/tutorial/lesson18.html">Binary
+               Trees</a>
+              <br><br><a href="https://www.cprogramming.com/tutorial/lesson15.html">Linked
+              Lists</a>
+               
+
+
+<div id="footer" class="noprint">
+
+<div id="social" style="margin-top:5px;height:23px;">
+<table>
+<tbody><tr>
+<td> 
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/lY4eZXm_YWu.html" style="border: none;"></iframe></div></div></div>
+<div id="fb-recommend" class="fb-like fb_iframe_widget" data-send="false" data-width="120" data-height="21" data-layout="button_count" data-action="recommend" data-href="http://www.cprogramming.com/tutorial/computersciencetheory/huffman.html" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=recommend&amp;app_id=&amp;container_width=0&amp;height=21&amp;href=http%3A%2F%2Fwww.cprogramming.com%2Ftutorial%2Fcomputersciencetheory%2Fhuffman.html&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;width=120"><span style="vertical-align: bottom; width: 111px; height: 20px;"><iframe name="f2946220746c83c" width="120px" height="21px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/like.html" style="border: none; visibility: visible; width: 111px; height: 20px;" class=""></iframe></span></div>
+</td>
+<td>
+<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/tweet_button.5069e7f3e4e64c1f4fb5d33d0b653ff6.en.html" style="position: static; visibility: visible; width: 61px; height: 20px;"></iframe>
+</td>
+<td>
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I1_1511277774090" name="I1_1511277774090" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/fastbutton.html" data-gapiattached="true" title="G+"></iframe></div>
+</td>
+</tr>
+</tbody></table>
+</div>
+
+<div style="font-size:14px;padding:10px;margin-top:5px;margin-bottom:5px;">
+<div style="width:400px; margin-top:10px; float:left; margin-bottom: 15px;">
+    <div id="old-ad">
+    <a href="https://www.cprogramming.com/c++book/?inl=ft-nhp"><img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/small_3d.jpg" border="0" align="left"></a><a href="https://www.cprogramming.com/c++book/?inl=ft-nhp">Want to become a C++ programmer? The Cprogramming.com ebook, Jumping into C++, will walk you through it, step-by-step. Get Jumping into C++ today!</a>
+    </div>
+</div>
+<div style="clear: both"></div>
+
+
+<script>
+function abTest(element_name_sets) {
+    var element_to_show;
+    var element_count = element_name_sets.length;
+    var i;
+    for ( i = 0; i < element_count; i++ )
+    {
+        if ( Math.random() <= 1 / ( element_count - i ) ) {
+                break;
+        }
+    }
+    var element_name_set = element_name_sets[ i ];
+    for ( i = 0; i < element_name_set.length; i++ )
+    {
+        element_to_show = document.getElementById( element_name_set[ i ] );
+        element_to_show.style.display = "block";
+    }
+}
+//abTest( [["old-ad", "new-ad"]] );
+</script>
+
+<b>Popular pages</b>
+<ul>
+ <li><a href="https://www.cprogramming.com/begin.html">Exactly how to get started with C++ (or C) today</a> 
+</li><li><a href="https://www.cprogramming.com/tutorial/c-tutorial.html">C Tutorial</a>
+</li><li><a href="https://www.cprogramming.com/tutorial/c++-tutorial.html">C++ Tutorial</a>
+</li><li><a href="https://www.cprogramming.com/how_to_learn_to_program.html">5 ways you can learn to program faster</a> 
+</li><li><a href="https://www.cprogramming.com/beginner_programming_mistakes.html">The 5 Most Common Problems New Programmers Face</a>
+</li><li><a href="https://www.cprogramming.com/code_blocks/">How to set up a compiler</a>
+</li><li><a href="https://www.cprogramming.com/tutorial/common.html">8 Common programming Mistakes</a> 
+</li><li><a href="https://www.cprogramming.com/c++11/what-is-c++0x.html">What is C++11?</a>
+</li><li><a href="https://www.cprogramming.com/tutorial/game_programming/same_game_part1.html">How to make a game in 48 hours</a>
+</li></ul>
+
+<b>Recent additions</b> <a href="https://feeds2.feedburner.com/Cprogrammingcom" rel="alternate" type="application/rss+xml"><img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/feed-icon16x16.png" alt="subscribe to a feed" style="border:0" width="16" height="16"></a>
+<ul>
+
+                        <li><a href="https://www.cprogramming.com/debugging/pvs-studio.html">Searching for errors using PVS-Studio</a> - September 4, 2017</li> 
+<li><a href="https://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html">How to create a shared library on Linux with GCC</a></li>
+<li> <a href="https://www.cprogramming.com/c++11/c++11-nullptr-strongly-typed-enum-class.html">Enum classes and nullptr in C++11</a></li>
+<li><a href="https://www.cprogramming.com/tutorial/computersciencetheory/hash-table.html">Learn about The Hash Table</a></li>
+<li><a href="https://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html">Rvalue References and Move Semantics in C++11</a></li>
+<li><a href="https://www.cprogramming.com/java/c-and-c++-for-java-programmers.html">C and C++ for Java Programmers</a></li>
+<li><a href="https://www.cprogramming.com/tutorial/c++-iostreams.html">A Gentle Introduction to C++ IO Streams</a></li>
+</ul>
+</div>
+<div id="ld-6395-8166"></div><script>(function(w,d,s,i){w.ldAdInit=w.ldAdInit||[];w.ldAdInit.push({slot:8338751818573927,size:[0, 0],id:"ld-6395-8166"});if(!d.getElementById(i)){var j=d.createElement(s),p=d.getElementsByTagName(s)[0];j.async=true;j.src="//cdn2.lockerdome.com/_js/ajs.js";j.id=i;p.parentNode.insertBefore(j,p);}})(window,document,"script","ld-ajs");</script>
+
+<style type="text/css">
+@import url(https://www.google.com/cse/api/branding.css);
+</style>
+<div class="cse-branding-bottom" style="background-color:#FFFFFF;color:#000000;width:50%; margin:auto">
+  <div class="cse-branding-form">
+    <form action="https://www.google.com/cse" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="partner-pub-2560316224908115:0581759109">
+        <input type="hidden" name="ie" value="UTF-8">
+        <input type="text" name="q" size="55">
+        <input type="submit" name="sa" value="Search">
+      </div>
+    </form>
+  </div>
+  <div class="cse-branding-logo">
+    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/poweredby_FFFFFF.gif" alt="Google">
+  </div>
+  <div class="cse-branding-text">
+    Custom Search
+  </div>
+</div>
+
+
+<center>
+<div style="margin-top:20px; margin-bottom: 20px">
+<script type="text/javascript">
+<!--
+google_ad_client = "pub-2560316224908115";
+/* link_ads_bottom */
+google_ad_slot = "2258412831";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script> 
+<script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js" style="display: none !important;"> </script> 
+</div>
+ 
+<script type="text/javascript" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/618210012.js"></script><style type="text/css">#af-form-618210012 .af-body .af-textWrap{width:98%;display:block;float:none;}#af-form-618210012 .af-body a{color:#AA0101;text-decoration:underline;font-style:normal;font-weight:normal;}#af-form-618210012 .af-body input.text, #af-form-618210012 .af-body textarea{background-color:#FFFFFF;border-color:#000000;border-width:1px;border-style:solid;color:#000000;text-decoration:none;font-style:normal;font-weight:normal;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-body input.text:focus, #af-form-618210012 .af-body textarea:focus{background-color:#FFFFFF;border-color:#AA0101;border-width:1px;border-style:solid;}#af-form-618210012 .af-body label.previewLabel{display:block;float:none;text-align:left;width:auto;color:#000000;text-decoration:none;font-style:normal;font-weight:normal;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-body{padding-bottom:15px;padding-top:0px;background-repeat:no-repeat;background-position:inherit;background-image:none;color:#000000;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-footer{padding-bottom:0px;padding-top:0px;padding-right:15px;padding-left:15px;background-color:#transparent;border-width:1px;border-bottom-style:none;border-left-style:none;border-right-style:none;border-top-style:none;color:#000000;font-size:12px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-header{padding-bottom:95px;padding-top:20px;padding-right:115px;padding-left:10px;background-color:transparent;background-repeat:no-repeat;background-position:top right;background-image:url("https://forms.aweber.com/images/forms/sign-up-below/big-red/header.png");border-width:1px;border-bottom-style:none;border-left-style:none;border-right-style:none;border-top-style:none;color:#AA0101;font-size:16px;font-family:Verdana, sans-serif;}#af-form-618210012 .af-quirksMode .bodyText{padding-top:2px;padding-bottom:2px;}#af-form-618210012 .af-quirksMode{padding-right:15px;padding-left:15px;}#af-form-618210012 .af-standards .af-element{padding-right:15px;padding-left:15px;}#af-form-618210012 .bodyText p{margin:1em 0;}#af-form-618210012 .buttonContainer input.submit{background-color:#0479C2;background-image:url("https://forms.aweber.com/images/forms/sign-up-below/big-red/button.png");color:#FFFFFF;text-decoration:none;font-style:normal;font-weight:normal;font-size:14px;font-family:Verdana, sans-serif;}#af-form-618210012 .buttonContainer input.submit{width:auto;}#af-form-618210012 .buttonContainer{text-align:center;}#af-form-618210012 body,#af-form-618210012 dl,#af-form-618210012 dt,#af-form-618210012 dd,#af-form-618210012 h1,#af-form-618210012 h2,#af-form-618210012 h3,#af-form-618210012 h4,#af-form-618210012 h5,#af-form-618210012 h6,#af-form-618210012 pre,#af-form-618210012 code,#af-form-618210012 fieldset,#af-form-618210012 legend,#af-form-618210012 blockquote,#af-form-618210012 th,#af-form-618210012 td{float:none;color:inherit;position:static;margin:0;padding:0;}#af-form-618210012 button,#af-form-618210012 input,#af-form-618210012 submit,#af-form-618210012 textarea,#af-form-618210012 select,#af-form-618210012 label,#af-form-618210012 optgroup,#af-form-618210012 option{float:none;position:static;margin:0;}#af-form-618210012 div{margin:0;}#af-form-618210012 fieldset{border:0;}#af-form-618210012 form,#af-form-618210012 textarea,.af-form-wrapper,.af-form-close-button,#af-form-618210012 img{float:none;color:inherit;position:static;background-color:none;border:none;margin:0;padding:0;}#af-form-618210012 input,#af-form-618210012 button,#af-form-618210012 textarea,#af-form-618210012 select{font-size:100%;}#af-form-618210012 p{color:inherit;}#af-form-618210012 select,#af-form-618210012 label,#af-form-618210012 optgroup,#af-form-618210012 option{padding:0;}#af-form-618210012 table{border-collapse:collapse;border-spacing:0;}#af-form-618210012 ul,#af-form-618210012 ol{list-style-image:none;list-style-position:outside;list-style-type:disc;padding-left:40px;}#af-form-618210012,#af-form-618210012 .quirksMode{width:100%;max-width:429px;}#af-form-618210012.af-quirksMode{overflow-x:hidden;}#af-form-618210012{background-color:transparent;border-color:#CFCFCF;border-width:1px;border-style:none;}#af-form-618210012{display:block;}#af-form-618210012{overflow:hidden;}.af-body .af-textWrap{text-align:left;}.af-body input.image{border:none!important;}.af-body input.submit,.af-body input.image,.af-form .af-element input.button{float:none!important;}.af-body input.text{width:100%;float:none;padding:2px!important;}.af-body.af-standards input.submit{padding:4px 12px;}.af-clear{clear:both;}.af-element label{text-align:left;display:block;float:left;}.af-element{padding-bottom:5px;padding-top:5px;}.af-form-wrapper{text-indent:0;}.af-form{text-align:left;margin:auto;}.af-header,.af-footer{margin-bottom:0;margin-top:0;padding:10px;}.af-quirksMode .af-element{padding-left:0!important;padding-right:0!important;}.lbl-right .af-element label{text-align:right;}body {}</style><form method="post" class="af-form-wrapper" accept-charset="UTF-8" action="https://www.aweber.com/scripts/addlead.pl"><div style="display: none;"><input type="hidden" name="meta_web_form_id" value="618210012"><input type="hidden" name="meta_split_id" value=""><input type="hidden" name="listname" value="cprogramming"><input type="hidden" name="redirect" value="http://www.cprogramming.com/ml_thankyou.html" id="redirect_0ca55268383156f000c33a36a5013bff"><input type="hidden" name="meta_adtracking" value="inline"><input type="hidden" name="meta_message" value="1"><input type="hidden" name="meta_required" value="email"><input type="hidden" name="meta_tooltip" value=""></div><div id="af-form-618210012" class="af-form"><div id="af-header-618210012" class="af-header"><div class="bodyText"><center><div><div>Join our mailing list to keep up with the latest news and updates about Cprogramming.com!</div>&nbsp;</div></center></div></div><div id="af-body-618210012" class="af-body af-standards"><div class="af-element"><label class="previewLabel" for="awf_field-28821296">Name</label><div class="af-textWrap"><input id="awf_field-28821296" type="text" name="name" class="text" value="" onfocus=" if (this.value == &#39;&#39;) { this.value = &#39;&#39;; }" onblur="if (this.value == &#39;&#39;) { this.value=&#39;&#39;;} " tabindex="500"></div><div class="af-clear"></div></div><div class="af-element"><label class="previewLabel" for="awf_field-28821297">Email</label><div class="af-textWrap"><input class="text" id="awf_field-28821297" type="text" name="email" value="" tabindex="501" onfocus=" if (this.value == &#39;&#39;) { this.value = &#39;&#39;; }" onblur="if (this.value == &#39;&#39;) { this.value=&#39;&#39;;} "></div><div class="af-clear"></div></div><div class="af-element"><div class="bodyText"><center></center></div><div class="af-clear"></div></div><div class="af-element buttonContainer"><input name="submit" id="af-submit-image-618210012" type="image" class="image" style="background: none; max-width: 100%;" alt="Submit Form" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/button.png" tabindex="502"><div class="af-clear"></div></div><div class="af-element" style="text-align: center"><img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/saved_resource" alt="Subscriber Counter"></div></div><div id="af-footer-618210012" class="af-footer"><div class="bodyText"><p>&nbsp;</p></div></div></div></form><script type="text/javascript">// Special handling for facebook iOS since it cannot open new windows(function() {    if (navigator.userAgent.indexOf('FBIOS') !== -1 || navigator.userAgent.indexOf('Twitter for iPhone') !== -1) {        document.getElementById('af-form-618210012').parentElement.removeAttribute('target');    }})();</script><script type="text/javascript">    <!--    (function() {        var IE = /*@cc_on!@*/false;        if (!IE) { return; }        if (document.compatMode && document.compatMode == 'BackCompat') {            if (document.getElementById("af-form-618210012")) {                document.getElementById("af-form-618210012").className = 'af-form af-quirksMode';            }            if (document.getElementById("af-body-618210012")) {                document.getElementById("af-body-618210012").className = "af-body inline af-quirksMode";            }            if (document.getElementById("af-header-618210012")) {                document.getElementById("af-header-618210012").className = "af-header af-quirksMode";            }            if (document.getElementById("af-footer-618210012")) {                document.getElementById("af-footer-618210012").className = "af-footer af-quirksMode";            }        }    })();    --></script>
+
+<div class="footer-links" style="padding:10px">
+<a href="https://www.cprogramming.com/advertising.html">Advertising</a> | <a href="https://www.cprogramming.com/privacy.html">Privacy policy</a> |
+<a href="https://www.cprogramming.com/use.html">Copyright © 1997-2017 Cprogramming.com. All rights reserved.</a> | <a href="mailto:webmaster@cprogramming.com">webmaster@cprogramming.com</a>
+</div>
+</center></div>
+</div>
+</td>
+    	
+
+
+<td class="content noprint" valign="top" rowspan="1" bgcolor="#EBEBEB">
+<div class="content2"><br><div class="verticalad" style="display: none !important;">
+
+
+
+
+<script type="text/javascript">
+GA_googleFillSlot("RunOfSite_ATF_skyscraper_160x600");
+</script>
+
+
+
+
+
+
+</div><br>
+
+<style type="text/css">
+.sidebar-box { width: 150px; margin-bottom:5px; }
+</style>
+    <div id="side-images">
+        <div style="padding:5px;margin-top:5px">
+            <div style="margin-bottom: 5px">
+                <b>Popular pages</b>
+            </div>
+            <div>
+                
+                <!--http://www.flickr.com/photos/baslow/5620208/sizes/o/in/photostream/ -->
+                <div class="sidebar-box">
+                    <a href="https://www.cprogramming.com/tutorial/c-tutorial.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/5620208_bff9c514e6_s.jpg" border="0" height="75" width="75" alt="C tutorial">
+                    <br>
+                    C Tutorial
+                    </a>
+                </div>
+                
+
+                
+                <!--http://www.flickr.com/photos/29233640@N07/2855530649/sizes/sq/in/photostream/-->
+                <div class="sidebar-box">
+                    <a href="https://www.cprogramming.com/begin.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/2855530649_905f7862fd_s.jpg" border="0" height="75" width="75" alt="Get started">
+                    <br>
+                    Exactly how to get started with C++ (or C) today</a>
+                </div>
+                
+
+                
+                <!--http://www.flickr.com/photos/mikecogh/6505012533/sizes/sq/in/photostream/-->
+                <div class="sidebar-box">
+                    <a href="https://www.cprogramming.com/how_to_learn_to_program.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/6505012533_55c83fdfa0_s.jpg" border="0" height="75" width="75" alt="Learn to program">
+                    <br>
+                    5 ways you can learn to program faster</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                    <a href="https://www.cprogramming.com/tutorial/c++-tutorial.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/c++-img.png" border="0" height="75" width="75" alt="C++ tutorial">
+                    <br>
+                    C++ Tutorial</a>
+                </div>
+                
+
+                
+                <!--http://www.flickr.com/photos/giopuo/3441263816/sizes/sq/in/photostream/-->
+                <div class="sidebar-box">
+                    <a href="https://www.cprogramming.com/beginner_programming_mistakes.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/3441263816_95f132a884_s.jpg" border="0" height="75" width="75" alt="Problems new programmers face">
+                    <br>
+                    The 5 Most Common Problems New Programmers Face</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                   <a href="https://www.cprogramming.com/tutorial/game_programming/same_game_part1.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/same_game_small.png" border="0" height="42" width="42" alt="Learn to make a game">
+                    <br>
+                   How to make a game in 48 hours</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                   <a href="https://www.cprogramming.com/tutorial/common.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/2291127824_087a497bea_s.jpg" border="0" height="75" width="75" alt="Common problems">
+                    <br>
+                   8 Common Programming Mistakes</a>
+                </div>
+                
+
+                
+                <div class="sidebar-box">
+                   <a href="https://www.cprogramming.com/c++11/what-is-c++0x.html">
+                    <img src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/c++11.png" border="0" height="75" width="75" alt="C++11">
+                    <br>
+                   What is C++11?</a>
+                </div>
+                
+            </div>
+        </div>
+        <div style="display:block">
+            <a href="https://www.cprogramming.com/image_credits.html">Image credits</a>
+        </div>
+    </div>
+</div>
+</td>  	
+
+</tr>
+</tbody></table>
+</div>
+
+
+<script>
+(function(w, d, s) {
+  var cur_url = window.location;
+  var loc = cur_url; 
+  if ( /htm(l?)/.test( cur_url.pathname ) ) {
+    loc = cur_url.protocol + "//" + cur_url.host + cur_url.pathname.replace( /\+/g, "%2b" );
+  }
+  //d.getElementById( "fb-recommend" ).setAttribute( "data-href", loc );
+  d.getElementById( "fb-recommend" ).setAttribute( "data-href", loc.toString().replace("https:", "http:") );
+  function go(){
+    var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.src = url; js.id = id;
+          fjs.parentNode.insertBefore(js, fjs);
+        };
+    load('https://connect.facebook.net/en_US/all.js#xfbml=1&channelUrl=https%3A%2F%2Fwww.cprogramming.com%2Ffb%2Fchannel.html', 'fbjssdk');
+    load('https://apis.google.com/js/plusone.js', 'gplus1js');
+    load('https://platform.twitter.com/widgets.js', 'tweetjs');
+  }
+  if (w.addEventListener) { w.addEventListener("load", go, false); }
+  else if (w.attachEvent) { w.attachEvent("onload",go); }
+}(window, document, 'script'));
+</script>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/adcss.css" media="screen">
+
+<script src="https://m.servedby-buysellads.com/monetization.js" type="text/javascript" style="display: none !important;"></script>
+<div id="default_demo"></div>
+<script type="text/javascript">
+(function(){
+  // format, zoneKey, segment:value, options
+  _bsa.init('default', 'CVADL27M', 'placement:demo', {
+    target: '#default_demo',
+    align: 'horizontal',
+    disable_css: 'true'
+  });
+})();
+</script>
+
+</div><iframe name="oauth2relay343308228" id="oauth2relay343308228" src="./Huffman Encoding Compression Algorithm Tutorial - Cprogramming.com_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>
